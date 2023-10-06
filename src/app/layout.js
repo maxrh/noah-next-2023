@@ -1,5 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
+import PageHeader from './components/page-header'
 
 const orbiter = localFont({ 
   src: './fonts/TASAOrbiter/TASAOrbiterVF.woff2',
@@ -13,9 +14,14 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className={`${orbiter.variable} font-sans`}>{children}</body>
-    </html>
-  )
+    return (
+        <html lang="en">
+            <body className={`${orbiter.variable} font-sans`}>
+                <div className='page-container'>
+                    <PageHeader />
+                    {children}
+                </div>
+            </body>
+        </html>
+    )
 }
