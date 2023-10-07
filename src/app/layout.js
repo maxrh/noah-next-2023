@@ -1,6 +1,7 @@
 import './globals.css'
 import localFont from 'next/font/local'
 import PageHeader from './components/page-header'
+import PageFooter from './components/page-footer'
 
 const orbiter = localFont({ 
   src: './fonts/TASAOrbiter/TASAOrbiterVF.woff2',
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
                 <div className='page-container'>
                     <PageHeader />
                     {children}
+                    <PageFooter />
                 </div>
             </body>
         </html>

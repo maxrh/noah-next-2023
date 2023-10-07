@@ -9,7 +9,7 @@ const Tabs = TabsPrimitive.Root
 const TabsList = React.forwardRef(({ className, ...props }, ref) => (
     <TabsPrimitive.List
         ref={ref}
-        className={cn("inline-flex h-4 items-center justify-start text-muted-foreground", className)}
+        className={cn("inline-flex h-10 items-center gap-2 justify-center text-muted-foreground flex-shrink-0", className)}
         {...props} 
     />
 ))
@@ -19,7 +19,7 @@ TabsList.displayName = TabsPrimitive.List.displayName
 const TabsTrigger = React.forwardRef(({ className, ...props }, ref) => (
     <TabsPrimitive.Trigger
         ref={ref}
-        className={cn("inline-flex items-center justify-center whitespace-nowrap h-full text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground", className)}
+        className={cn("inline-flex items-center justify-center whitespace-nowrap px-4 py-2 h-full w-full text-sm font-medium  bg-stone-100 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-background", className)}
         {...props} 
     />
 ))
@@ -29,10 +29,7 @@ TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
-    className={cn(
-      "mt-6 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-      className
-    )}
+    className={cn("mt-6 p-8 bg-stone-100 h-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className)}
     {...props} />
 ))
 TabsContent.displayName = TabsPrimitive.Content.displayName
