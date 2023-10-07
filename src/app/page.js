@@ -27,7 +27,6 @@ export default function Home() {
                         <BlockTitle title="Du kan hjælpe!" id="calendar-heading" />
                         <Tabs defaultValue="donate" className='flex flex-col h-full'>
                             <TabsList className="w-full">
-                                <TabsTrigger value="follow">Følg & del</TabsTrigger>
                                 <TabsTrigger value="donate">Giv bidrag</TabsTrigger>
                                 <TabsTrigger value="join">Bliv aktiv</TabsTrigger>
                             </TabsList>
