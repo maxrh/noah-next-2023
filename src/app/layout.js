@@ -1,13 +1,29 @@
 import './globals.css'
-import localFont from 'next/font/local'
+
+import Orbiter from 'next/font/local'
+import localfont from 'next/font/local'
+import { Inter } from 'next/font/google'
 import PageHeader from './components/page-header'
 import PageFooter from './components/page-footer'
 
-const orbiter = localFont({ 
+const inter = Inter({ 
+    subsets: ['latin'],
+    variable: '--font-inter'
+})
+
+const ibmplex = localfont({ 
+    src: './fonts/IBMPlexSans/IBM_Plex_Sans_Var-Roman.woff2',
+    subsets: ['latin'],
+    variable: '--font-ibmplex',
+})
+
+const orbiter = Orbiter({ 
   src: './fonts/TASAOrbiter/TASAOrbiterVF.woff2',
   subsets: ['latin'],
   variable: '--font-orbiter',
 })
+
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,8 +33,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={`${orbiter.variable} font-sans`}>
-                <div className='page-container'>
+            <body className={`${ibmplex.variable} font-sans`}>
+                <div className='hero-style absolute top-0 left-0 w-full h-screen bg-emerald-300 -z-50'></div>
+                <div className='page-container '>
                     <PageHeader />
                     {children}
                     <PageFooter />

@@ -13,6 +13,10 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['var(--font-orbiter)'],
+                sans: ['var(--font-ibmplex)'],
+            },
+            maxWidth: {
+                'screen-3xl': '1800px',
             },
             colors: {
                 border: "hsl(var(--border))",
