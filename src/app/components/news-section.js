@@ -1,5 +1,6 @@
 "use client"
 
+import { Tags } from "./ui/tags"
 import { Button } from './ui/button'
 import { Toggle } from './ui/toggle'
 import { useState } from 'react'
@@ -8,38 +9,31 @@ import useSWR from 'swr'
 
 export default function NewsSection() {
     const [size, setSize] = useState(1)
-    const itemsPerPage = 4
+    const itemsPerPage = 8
 
     const fetcher = (...args) => fetch(...args).then(res => res.json())
     const { data, error, isLoading } = useSWR('/api/content', fetcher)
 
     if (error) return <div>failed to load</div>
 
-    const allContent = isLoading ? null : data.news.concat(data.events, /* other arrays */)
+    const allContent = isLoading ? null : data.news.concat(data.events, data.presse, /* other arrays */)
         .sort((a, b) => new Date(b.date) - new Date(a.date))
     const slicedContent = isLoading ? null : allContent.slice(0, size * itemsPerPage)
 
     return (
-        <section aria-labelledby='news-heading' className='max-w-screen-3xl w-full p-16'>
-            <div className='relative'>
-                <header className='mb-8'>
-                    <div className='relative'>
-                        <span className='block h-6 w-4 group-hover:w-full  striped-bg absolute top-0 left-0 transition-all ease-in-out duration-300 '></span>
-                        <span className='block h-6 w-full striped-bg-gray'></span>
-                    </div>
-                    <div className='px-4 py-8 flex items-center justify-between'>
-                        <h2 className={`text-4xl font-bold flex items-center`}  id="news-heading">
-                            Nyheder
-                        </h2>
-
-                        <div className="items-center flex space-x-5">
-                            <div className="items-center flex space-x-1">
-                                <Toggle  defaultPressed >Alle</Toggle>
-                                <Toggle  >Artikler</Toggle>
-                                <Toggle  >Events</Toggle>
-                                <Toggle  >Udgivelser</Toggle>
-                                <Toggle  >Presse</Toggle>
-                            </div>
+        <section aria-labelledby='news-heading' className='w-full p-16'>
+            <div className='relative max-w-screen-3xl mx-auto'>
+                <header className='mb-8 flex items-center justify-between'>
+                    <h2 className={`text-3xl font-bold flex items-center tracking-tight`}  id="news-heading">
+                        Nyheder
+                    </h2>
+                    <div className="items-center flex space-x-5">
+                        <div className="items-center flex space-x-1">
+                            <Toggle  defaultPressed >Alle</Toggle>
+                            <Toggle  >Artikler</Toggle>
+                            <Toggle  >Events</Toggle>
+                            <Toggle  >Udgivelser</Toggle>
+                            <Toggle  >Presse</Toggle>
                         </div>
                     </div>
                 </header>
@@ -54,12 +48,16 @@ export default function NewsSection() {
                             rel="noopener noreferrer"
                         >   
                             <div className='relative '>
-                                <Image src={item.imageUrl} alt={item.title} className='shadow-md  aspect-video object-cover object-center relative z-10' width={1080} height={608} />
-                                <span className='absolute block h-full w-full -bottom-2 -right-2 striped-bg'></span>
+                                <Image src={item.imageUrl} alt={item.title} className={`${item.type === 'event' ? 'aspect-square' : 'aspect-video'} object-cover object-center relative z-10`} width={1080} height={608} />
                             </div>
                         
-                            <div className='px-2 py-6'>
-                                <h2 className={`mb-4 font-bold text-2xl flex items-center leading-tight`}>
+                            <div className='px-0 py-4'>
+                                <div className='relative mb-3 flex items-center gap-2'>
+                                    <Tags>{item.type}</Tags>
+                                    <Tags variant="secondary">Biodiversitet</Tags> 
+                                    <Tags variant="secondary">Video</Tags> 
+                                </div>
+                                <h2 className={`mb-3 font-bold text-3xl flex items-center leading-none`}>
                                     {item.title}
                                 </h2>
                                 <p className='text-sm'>{item.subtitle}</p>

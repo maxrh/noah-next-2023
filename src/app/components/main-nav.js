@@ -3,7 +3,6 @@ import Link from "next/link"
 
 export default function MainNav() {
         
-
     return (
         <nav className="main-nav flex items-center">
            
@@ -15,9 +14,9 @@ export default function MainNav() {
                 }}
             >
                 
-                <span className="block h-1 my-0.5 w-full rounded bg-emerald-600"></span>
-                <span className="block h-1 my-0.5 w-full rounded bg-emerald-600"></span>
-                <span className="block h-1 my-0.5 w-full rounded bg-emerald-600"></span>
+                <span className="block h-1 my-0.5 w-full rounded bg-foreground"></span>
+                <span className="block h-1 my-0.5 w-full rounded bg-foreground"></span>
+                <span className="block h-1 my-0.5 w-full rounded bg-foreground"></span>
             </button>
             
         </nav>

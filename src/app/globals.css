@@ -4,9 +4,10 @@
 
 @layer base {
     :root {
-      --background: 60, 9%, 98%;
-      --foreground: 221, 39%, 11%;
-  
+      --background: 0, 0%, 96%;
+      --foreground: 215, 28%, 17%;
+      --foreground-rgb: 31, 41, 55;
+
       --card: 0 0% 100%;
       --card-foreground: 224 71.4% 4.1%;
    
@@ -28,7 +29,7 @@
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 210 20% 98%;
   
-      --border: 20, 6%, 90%;
+      --border: var(--foreground);
       --input: 220 13% 91%;
       --ring: 224 71.4% 4.1%;
    
@@ -66,15 +67,14 @@
     }
 }
    
-  @layer base {
+@layer base {
     * {
       @apply border-border;
     }
     body {
       @apply bg-background text-foreground;
     }
-  }
-
+}
 
 
 * {
@@ -84,7 +84,7 @@
 
 body {
     color: hsl(var(--foreground));
-    background: rgb(244 244 244);
+    background: hsl(var(--background));
 }
 
 .word-spacing-sm {

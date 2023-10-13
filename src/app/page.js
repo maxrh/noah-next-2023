@@ -1,23 +1,49 @@
-import Image from 'next/image'
-import { Button } from "./components/ui/button"
-import BlockTitle from './components/ui/block-title'
-import { Separator } from './components/ui/separator'
+"use client"
+
 import NewsSection from './components/news-section'
 import ProgramSection from './components/program-section'
 import PagesSection from './components/pages-section'
 import HeroSection from './components/hero-section'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState, useEffect, useRef  } from 'react'
+
+const defaultColor = 'rgb(110, 231, 183)'
 
 export default function Home() {
-    return (
-            
-        <main className="flex flex-col items-center justify-between min-h-screen w-full pt-[120px]">
-            <div className="flex flex-col items-center w-full">
-                <HeroSection />
-                <PagesSection />
-                <NewsSection />
-                <ProgramSection />
-            </div>
-        </main>
+    const [heroColor, setHeroColor] = useState(defaultColor)
+    const [heroId, setHeroId] = useState(null)
+    const prevColorRef = useRef(defaultColor);
 
+    const handleHeroColor = (key, newColor) => {
+        if (newColor) (
+            setHeroColor(newColor),
+            setHeroId(key)
+        )
+    }
+
+    useEffect(() => {
+        prevColorRef.current = heroColor;
+    }, [heroColor]);
+
+    return (
+        <>
+            <main className="flex flex-col items-center justify-between min-h-screen w-full pt-[120px]">
+                <motion.div 
+                    key={heroId}
+                    className={`hero-style absolute top-0 left-0 w-full h-screen -z-50`} 
+                    initial={{ opacity: 1, backgroundColor: prevColorRef.current  }}
+                    animate={{ opacity: 1, backgroundColor: heroColor }}   
+                    transition={{ duration: 1 }}  
+ 
+                ></motion.div>
+
+                    <div className="flex flex-col items-center w-full">
+                        <HeroSection handleHeroColor={handleHeroColor}/>
+                        {/* <PagesSection /> */}
+                        <NewsSection />
+                        <ProgramSection />
+                    </div>
+            </main>
+        </>
     )
 }

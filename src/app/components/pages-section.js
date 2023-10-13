@@ -10,11 +10,10 @@ export default function PagesSection() {
 
     return (
         <section className="mb-8 relative max-w-screen-3xl w-full p-16" aria-labelledby='ourwork-heading'>
-
             <div className="grid gap-16 gap-y-8 grid-cols-4 items-stretch border p-16">
-
                 {!isLoading ? data.map(item => (
-                    <a
+                    <a  
+                        key={item.id}
                         href="/"
                         className="group transition-colors relative h-full w-full flex flex-col"
                         target="_blank"
@@ -29,12 +28,11 @@ export default function PagesSection() {
                                 {item.title}
                             </h2>
                             <p className={`text-sm `}>
-                            {item.subtitle}
+                                {item.subtitle}
                             </p>
                         </div>
                     </a>
                 )) : ( <p>is loading</p> )}
-
             </div>
         </section>
     )
