@@ -4,7 +4,7 @@ export async function GET(request) {
                 id: '1',
                 type: 'Kampagne',
                 title: 'Eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                image: 'coffee-farm-bro.png',
+                image: 'coffee-farm-bro_comp.png',
                 date: '2023-12-06T14:30:00.000Z',  // example date
                 color: 'rgb(110, 231, 183)',
             },
