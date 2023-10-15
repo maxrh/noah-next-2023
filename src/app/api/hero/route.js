@@ -4,27 +4,42 @@ export async function GET(request) {
                 id: '1',
                 type: 'Kampagne',
                 title: 'Eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                image: 'Moed_fagraadsaktiv.png',
+                image: 'coffee-farm-bro.png',
                 date: '2023-12-06T14:30:00.000Z',  // example date
                 color: 'rgb(110, 231, 183)',
             },
             {
                 id: '2',
                 type: 'Event',
-                title: 'Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin',
-                image: 'Visualdata-bro.png',
+                title: 'In hac habitasse platea dictumst vestibulum rhoncus',
+                image: 'tattoo-birds.png',
                 date: '2023-09-06T14:30:00.000Z',  // example date
-                color: 'rgb(248, 113, 113)',
+                color: 'rgb(196, 181, 253)',
             },
             {
                 id: '3',
                 type: 'Nyt website',
                 title: 'Quam viverra orci sagittis eu volutpat odio facilisis mauris sit',
-                image: 'happy.png',
+                image: 'desktop-computer-bro.png',
                 date: '2023-07-06T14:30:00.000Z',  // example date
-                color: 'rgb(129, 140, 248)',
+                color: 'rgb(252, 211, 77)',
+            },
+            {
+                id: '4',
+                type: 'Vores Arbejde',
+                title: 'Quam viverra orci sagittis eu volutpat odio facilisis mauris sit',
+                image: 'Ice melting-bro.png',
+                date: '2023-07-06T14:30:00.000Z',  // example date
+                color: 'rgb(94, 234, 212)',
+            },
+            {
+                id: '5',
+                type: 'Giv et Bidrag',
+                title: 'Quam viverra orci sagittis eu volutpat odio facilisis mauris sit',
+                image: 'money.png',
+                date: '2023-07-06T14:30:00.000Z',  // example date
+                color: 'rgb(253, 164, 175)',
             }
-
     ]
 
     const jsonData = JSON.stringify(slides);

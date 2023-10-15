@@ -12,8 +12,8 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['var(--font-orbiter)'],
                 sans: ['var(--font-ibmplex)'],
+                icons: ['var(--font-symbols)'],
             },
             maxWidth: {
                 'screen-3xl': '1800px',

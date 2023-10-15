@@ -11,7 +11,7 @@ export default function PageHeader() {
             <div className="flex justify-between items-center max-w-screen-3xl w-full h-full">
                 <div className="site-logo flex items-center flex-shrink-0 mr-auto">
                     <Link href="/" className="flex items-center w-44 h-10 -ml-2">
-                        <Image src="/Logo_NOAH_2020_small2.png" alt="logo" width={585} height={214} className="w-full" priority={true}/>
+                        <Image src="/Logo NOAH_update_2023.png" alt="logo" width={585} height={214} className="w-full" priority={true}/>
                     </Link>
                 </div>
                 <MainNav />
