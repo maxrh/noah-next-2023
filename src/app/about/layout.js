@@ -11,7 +11,7 @@ export default function AboutLayout({ children }) {
                         <SidebarNav />
                     </div>
                     {children}
-                    <div className="widget pt-16 w-full hidden xl:flex flex-col items-start  ">
+                    <div className="widget pt-16 w-full hidden 2xl:flex flex-col items-start  ">
                         <SidebarContentNav />
                     </div>
                 </div>
