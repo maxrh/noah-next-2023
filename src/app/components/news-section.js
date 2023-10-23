@@ -25,12 +25,12 @@ export default function NewsSection() {
             <div className='relative max-w-screen-3xl mx-auto'>
                 <header className='mb-8 flex items-center justify-between'>
                     <h2 className={`text-3xl font-bold flex items-center tracking-tight`}  id="news-heading">
-                        Aktuelt
+                        Nyheder
                     </h2>
                     <div className="items-center flex space-x-5">
                         <div className="items-center flex space-x-1">
                             <Toggle  defaultPressed >Alle</Toggle>
-                            <Toggle  >Artikler</Toggle>
+                            <Toggle  >Nyheder</Toggle>
                             <Toggle  >Events</Toggle>
                             <Toggle  >Udgivelser</Toggle>
                             <Toggle  >Presse</Toggle>

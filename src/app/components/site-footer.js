@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 
-export default function PageFooter() {
+export default function SiteFooter() {
 
     return (
         <div className="page-footer px-24 py-16 h-96">

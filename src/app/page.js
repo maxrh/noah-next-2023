@@ -26,24 +26,22 @@ export default function Home() {
     }, [heroColor]);
 
     return (
-        <>
-            <main className="flex flex-col items-center justify-between min-h-screen w-full pt-[120px]">
-                <motion.div 
-                    key={heroId}
-                    className={`hero-style absolute top-0 left-0 w-full h-screen -z-50`} 
-                    initial={{ opacity: 1, backgroundColor: prevColorRef.current  }}
-                    animate={{ opacity: 1, backgroundColor: heroColor }}   
-                    transition={{ duration: 1 }}  
- 
-                ></motion.div>
+        <div className="flex flex-col items-center justify-between min-h-screen w-full">
+            <motion.div 
+                key={heroId}
+                className={`hero-style absolute top-0 left-0 w-full h-screen -z-50`} 
+                initial={{ opacity: 1, backgroundColor: prevColorRef.current  }}
+                animate={{ opacity: 1, backgroundColor: heroColor }}   
+                transition={{ duration: 1 }}  
 
-                    <div className="flex flex-col items-center w-full">
-                        <HeroSection handleHeroColor={handleHeroColor}/>
-                        {/* <PagesSection /> */}
-                        <NewsSection />
-                        <ProgramSection />
-                    </div>
-            </main>
-        </>
+            ></motion.div>
+
+                <div className="flex flex-col items-center w-full">
+                    <HeroSection handleHeroColor={handleHeroColor}/>
+                    {/* <PagesSection /> */}
+                    <NewsSection />
+                    <ProgramSection />
+                </div>
+        </div>
     )
 }

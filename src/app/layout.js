@@ -2,8 +2,8 @@
 import './globals.css'
 import IBMPlex from 'next/font/local'
 import localIcon from 'next/font/local'
-import PageHeader from './components/page-header'
-import PageFooter from './components/page-footer'
+import SiteHeader from './components/site-header'
+import SiteFooter from './components/site-footer'
 
 
 const ibmplex = IBMPlex({ 
@@ -28,10 +28,12 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={`${ibmplex.variable} font-sans ${materialSymbols.variable} `}>
-                <div className='page-container '>
-                    <PageHeader />
-                    {children}
-                    <PageFooter />
+                <div className='page-container'>
+                    <SiteHeader />
+                    <main className='main min-h-screen w-full pt-[120px] '>
+                        {children}
+                    </main>
+                    <SiteFooter />
                 </div>
             </body>
         </html>

@@ -12,7 +12,7 @@ export async function GET(request) {
                 id: '2',
                 type: 'Event',
                 title: 'In hac habitasse platea dictumst vestibulum rhoncus',
-                image: 'tattoo-birds.png',
+                image: '9534_191225_final_lemonde_m_metoo_nazario.png',
                 date: '2023-09-06T14:30:00.000Z',  // example date
                 color: 'rgb(196, 181, 253)',
             },

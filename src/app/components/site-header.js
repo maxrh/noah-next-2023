@@ -2,7 +2,7 @@ import MainNav from "./main-nav"
 import Image from "next/image"
 import Link from "next/link"
 
-export default function PageHeader() {
+export default function SiteHeader() {
 
 
 
