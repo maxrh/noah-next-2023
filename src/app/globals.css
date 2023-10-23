@@ -5,8 +5,8 @@
 @layer base {
     :root {
       --background: 0, 0%, 96%;
-      --foreground: 215, 28%, 17%;
-      --foreground-rgb: 31, 41, 55;
+      --foreground: 221, 39.3%, 11%;
+      --foreground-rgb: 17, 24, 39;
 
       --card: 0 0% 100%;
       --card-foreground: 224 71.4% 4.1%;
@@ -107,7 +107,17 @@ i.symbol {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: 'liga';
-    font-variation-settings: 'FILL' 1, 'GRAD' 1, 'opsz' 24, 'wght' 500;
+    font-variation-settings: 'FILL' 1, 'GRAD' 1, 'opsz' 24, 'wght' 400;
+}
+
+
+i.symbol-sm {
+  font-size: 20px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' -25,
+  'opsz' 20
 }
 
 .group:hover .striped-bg-hover,

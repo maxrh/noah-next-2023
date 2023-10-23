@@ -38,6 +38,8 @@ export default function Home() {
 
                 <div className="flex flex-col items-center w-full">
                     <HeroSection handleHeroColor={handleHeroColor}/>
+                    <span className='block h-4 w-full striped-bg-gray'></span>
+
                     {/* <PagesSection /> */}
                     <NewsSection />
                     <ProgramSection />

@@ -26,8 +26,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
-            <body className={`${ibmplex.variable} font-sans ${materialSymbols.variable} `}>
+        <html lang="en" className='scroll-smooth'>
+            <body className={`${ibmplex.variable} font-sans ${materialSymbols.variable}`}>
                 <div className='page-container'>
                     <SiteHeader />
                     <main className='main min-h-screen w-full pt-[120px] '>
