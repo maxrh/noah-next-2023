@@ -54,7 +54,7 @@ export default function HeroSection({ handleHeroColor }) {
         <section className='hero h-[calc(100vh-120px)] w-full pb-12 flex flex-col items-start'>
             <div className="h-full w-full px-16">
                 { !isLoading ? 
-                    <div className='max-w-screen-3xl mx-auto w-full grid grid-cols-[max-content,2fr,3fr] grid-rows-[auto, auto] items-center'>
+                    <div className='max-w-screen-3xl mx-auto w-full grid grid-cols-[max-content,3fr,4fr] grid-rows-[auto,auto] items-center'>
                         <div className="order-none row-auto col-auto w-24 flex flex-col items-start justify-start mb-4">
                                 <motion.button 
                                     className='hover:opacity-70 transition-opacity p-1 h-8 '
