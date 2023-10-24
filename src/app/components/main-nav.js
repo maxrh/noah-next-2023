@@ -1,4 +1,5 @@
 "use client"
+
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
 
@@ -8,16 +9,28 @@ export default function MainNav() {
 
     return (
         <nav className="main-nav flex items-center">
-            <div className="flex items-stretch font-semibold text-sm tracking-wide uppercase text-foreground h-10 ">
-                <Link href="/" className={`group overflow-hidden relative ml-1 bg-background pb-2 pt-1.5 px-4 ${pathname === '/grupper' ? 'bg-emerald-300' : ''}`}>
+            <div className={`flex items-stretch font-semibold text-sm tracking-wide uppercase text-foreground h-10`}>
+                <Link href="/" className={`group relative ml-1 pb-2 pt-1.5 px-4  ${pathname === '/grupper' ? 'bg-emerald-300' : 'bg-background'}`}>
                     <span className="relative z-10">Grupper</span>
-                    <div className="-rotate-45 w-0 group-hover:w-96 transition-all duration-300 ease-in-out absolute -top-30 left-0 h-96 bg-emerald-300"></div>
+                    <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
                 </Link >
-                <Link href="/" className={`ml-1 bg-background pb-2 pt-1.5 px-4 hover:bg-emerald-200 ${pathname === '/bidrag' ? 'bg-emerald-300' : ''}`}>Bidrag</Link >
-                <Link href="/" className={`ml-1 bg-background pb-2 pt-1.5 px-4 hover:bg-emerald-200 ${pathname === '/materialer' ? 'bg-emerald-300' : ''}`}>Materialer</Link >
-                <Link href="/about" className={`ml-1 bg-background pb-2 pt-1.5 px-4 hover:bg-emerald-200 ${pathname === '/about' ? 'bg-emerald-300' : ''}`}>Om Noah</Link >
-                <div className="ml-1 bg-background hover:bg-emerald-200 px-2">
-                    <Link href="/about" className="flex items-center pt-1.5 "><i className="symbol ml-1">search</i></Link >
+                <Link href="/" className={`group relative ml-1  pb-2 pt-1.5 px-4 ${pathname === '/bidrag' ? 'bg-emerald-300' : 'bg-background'}`}>
+                    <span className="relative z-10">Bidrag</span>
+                    <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
+                </Link >
+                <Link href="/" className={`group relative ml-1 pb-2 pt-1.5 px-4 ${pathname === '/materialer' ? 'bg-emerald-300' : 'bg-background'}`}>
+                    <span className="relative z-10">Materialer</span>
+                    <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
+                </Link >
+                <Link href="/about" className={`group relative ml-1 pb-2 pt-1.5 px-4  ${pathname.startsWith('/about') ? 'bg-emerald-300' : 'bg-background'}`}>
+                    <span className="relative z-10">Om Noah</span>
+                    <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
+                </Link >
+                <div className="group relative ml-1">
+                    <Link href="/about" className="flex items-center justify-center w-10 h-full bg-background">
+                        <i className="symbol z-10 pb-1">search</i>
+                        <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
+                    </Link >
                     <form className="search hidden items-center">
                         <input type="text" placeholder="" className="search-input w-48 h-8  px-3 py-1.5"/>
                         <button type="submit" className="search-submit ml-2 h-8 w-8 flex items-center justify-center">
