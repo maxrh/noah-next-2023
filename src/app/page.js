@@ -22,11 +22,11 @@ export default function Home() {
     }
 
     useEffect(() => {
-        prevColorRef.current = heroColor;
-    }, [heroColor]);
+        prevColorRef.current = heroColor
+    }, [heroColor])
 
     return (
-        <div className="flex flex-col items-center justify-between min-h-screen w-full">
+        <div className="flex flex-col items-center justify-between min-h-screen w-full pt-[120px]">
             <motion.div 
                 key={heroId}
                 className={`hero-style absolute top-0 left-0 w-full h-screen -z-50`} 

@@ -5,7 +5,6 @@ import localIcon from 'next/font/local'
 import SiteHeader from './components/site-header'
 import SiteFooter from './components/site-footer'
 
-
 const ibmplex = IBMPlex({ 
     src: './fonts/IBMPlexSans/IBM_Plex_Sans_Var-Roman.woff2',
     subsets: ['latin'],
@@ -25,12 +24,13 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+
     return (
         <html lang="en" className='scroll-smooth'>
             <body className={`${ibmplex.variable} font-sans ${materialSymbols.variable}`}>
                 <div className='page-container'>
                     <SiteHeader />
-                    <main className='main min-h-screen w-full pt-[120px] '>
+                    <main className='main min-h-screen w-full'>
                         {children}
                     </main>
                     <SiteFooter />
