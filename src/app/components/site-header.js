@@ -4,7 +4,7 @@ import MainNav from "./main-nav"
 import Link from "next/link"
 import LogoSvg from "./logoSvg"
 import { usePathname } from 'next/navigation'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from "framer-motion"
 
 export default function SiteHeader() {
@@ -48,16 +48,18 @@ export default function SiteHeader() {
             menu: true,
         },
     ]
-
-    const currentPage = pages.find(page => page.href === pathname)
-    const customColors = currentPage?.customColors || []
     const [selectedCustomColor, setSelectedCustomColor] = useState(null)
     const [colorIndex, setColorIndex] = useState(0)  // State to keep track of the current color index
 
-    const theme = currentPage?.theme
-    const themeColor = theme === 'dark' ? '#e5e7eb' : '#111827'
-
-    const navItems = [ ...pages.filter(page => page.menu === true) ]
+    const { customColors, theme, themeColor, navItems } = useMemo(() => {
+        const currentPage = pages.find(page => page.href === pathname)
+        const customColors = currentPage?.customColors || []
+        const theme = currentPage?.theme
+        const themeColor = theme === 'dark' ? '#e5e7eb' : '#111827'
+        const navItems = pages.filter(page => page.menu === true)
+    
+        return { customColors, theme, themeColor, navItems }
+    }, [pages, pathname])
 
     useEffect(() => {
         setColorIndex(0)
