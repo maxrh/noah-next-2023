@@ -11,7 +11,7 @@ function NavItem({ item, pathname, level }) {
 
             <Link 
                 href={item.path} 
-                className={`relative flex justify-between items-center py-1.5 transition-all text-sm text-gray-800 hover:text-gray-950 ${pathname === item.path ? "font-medium text-gray-950" : ""}`}
+                className={`relative flex justify-between items-center py-1.5 transition-all text-sm hover:opacity-80 ${pathname === item.path ? "font-medium" : ""}`}
             >
                 {item.title}
                 <i className={`absolute right-0 symbol ${pathname === item.path ? "opacity-100" : "opacity-0"}`}>chevron_right</i>
@@ -86,8 +86,8 @@ export default function SidebarNav() {
     ]
 
     return (
-        <div className="sticky top-0 py-16">
-            <ul className="flex flex-col pr-12">
+        <div className="sticky top-0 py-16 w-full">
+            <ul className="flex flex-col">
                 {navItems.map((item, index) => (
                     <NavItem key={index} item={item} pathname={pathname} level={0}/>
                 ))}

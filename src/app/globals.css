@@ -4,8 +4,12 @@
 
 @layer base {
     :root {
-      --background: 0, 0%, 96%;
-      --foreground: 221, 39.3%, 11%;
+      --background: 215, 28%, 17%;
+      /*--background: 0, 0%, 96%;*/
+
+      --foreground: 0, 0%, 96%;
+
+      /*--foreground: 221, 39.3%, 11%;*/
       --foreground-rgb: 17, 24, 39;
 
       --card: 0 0% 100%;
@@ -34,6 +38,9 @@
       --ring: 224 71.4% 4.1%;
    
       --radius: 0.5rem;
+
+      --sidebar-width: 280px;
+      --content-width: 1024px;
     }
    
     .dark {
@@ -69,26 +76,25 @@
    
 @layer base {
     * {
-      @apply border-border;
+      @apply border-border scroll-smooth;
     }
     body {
       @apply bg-background text-foreground;
     }
+
+    .prose > :not(figure),
+    .prose-invert > :not(figure) {
+      @apply max-w-screen-md w-full mx-auto;
+    }
 }
 
 
-* {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
 
 body {
     color: hsl(var(--foreground));
-    background: hsl(var(--background));
-}
+    /* background: hsl(var(--background)); */
 
-.word-spacing-sm {
-    word-spacing: -0.2em;
+    background: #0f172a;
 }
 
 i.symbol {
@@ -119,6 +125,13 @@ i.symbol-light {
   'GRAD' 200,
   'opsz' 20
 }
+
+
+.mask-image {
+    mask-image: linear-gradient(#000, transparent);
+    mask-size: 100%;
+}
+
 
 .group:hover .striped-bg-hover,
 .striped-bg {

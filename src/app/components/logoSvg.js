@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-export default function LogoSvg({ cssClass }) {
+export default function LogoSvg({ customColor, themeColor }) {
 
     return (
 
@@ -11,12 +11,22 @@ export default function LogoSvg({ cssClass }) {
             x="0px" 
             y="0px" 
             viewBox="0 0 800 300" 
-            className={`w-full transition-colors duration-4000 ease-in-out ${cssClass}`}
+            className={`w-full`}
             initial={{ 
                 opacity: 0,
+                y: -10,
+                fill: customColor ? customColor : themeColor,
             }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            animate={{ 
+                opacity: 1,
+                y: 0,
+                fill: customColor ? customColor : themeColor,
+            }}
+            transition={{ 
+                type: "spring",
+                stiffness: 260,
+                damping: 15,
+            }}
         >
             <g>
                 <path d="M267.11,161.18c0.99-0.2,2.68,0.66,2.74-1.09c0.16-4.62,0.08-9.25,0.02-13.88c-0.01-0.6-0.49-1.18-0.65-1.8

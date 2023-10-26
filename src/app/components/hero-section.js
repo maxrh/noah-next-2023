@@ -51,7 +51,7 @@ export default function HeroSection({ handleHeroColor }) {
     if (error) return <div>failed to load</div>
     
     return (
-        <section className='hero h-[calc(100vh-120px)] w-full pb-12 flex flex-col items-start'>
+        <section className='hero h-[calc(100vh-120px)] w-full pb-12 flex flex-col items-start text-background'>
             <div className="h-full w-full px-16">
                 { !isLoading ? 
                     <div className='max-w-screen-3xl mx-auto w-full grid grid-cols-[max-content,3fr,4fr] grid-rows-[auto,auto] items-center'>

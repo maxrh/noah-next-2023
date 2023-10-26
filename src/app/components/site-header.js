@@ -4,7 +4,7 @@ import MainNav from "./main-nav"
 import Link from "next/link"
 import LogoSvg from "./logoSvg"
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from "react"
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion"
 
 export default function SiteHeader() {
@@ -44,47 +44,55 @@ export default function SiteHeader() {
             label: 'Om Noah',
             href: '/about',
             theme: 'dark',
-            logoColors: [
-                'fill-blue-700',
-            ],
+            customColors: [ '#ef4444', '#fcd34d', '#86efac', '#67e8f9', '#d8b4fe', '#fda4af'],
             menu: true,
         },
     ]
+
+
     const currentPage = pages.find(page => page.href === pathname)
-    const logoColors = currentPage.logoColors ? currentPage.logoColors : null
-    const [selectedLogoColor, setSelectedLogoColor] = useState(logoColors ? logoColors[0] : null)
+    const customColors = currentPage.customColors ? currentPage.customColors : null
+    const [selectedCustomColor, setSelectedCustomColor] = useState(customColors ? customColors[0] : null)
+
+    const [colorIndex, setColorIndex] = useState(0);  // State to keep track of the current color index
+
+    const theme = currentPage?.theme
+    const themeColor = theme === 'dark' ? '#e5e7eb' : '#111827'
+
+    const navItems = [ ...pages.filter(page => page.menu === true) ]
 
     useEffect(() => {
-        if (!logoColors) {
-            setSelectedLogoColor(currentPage.theme === 'dark' ? 'fill-gray-200' : 'fill-gray-800')
-        } else {
-            setSelectedLogoColor(logoColors[0])
-            if (logoColors.length === 1) return
+        // Initialize selectedCustomColor when the page changes
+        setColorIndex(0);  // Reset color index
+        setSelectedCustomColor(customColors ? customColors[0] : themeColor)
+    
+        // Set up color cycling if there are multiple custom colors
+        if (customColors && customColors.length > 1) {
             const interval = setInterval(() => {
-                setSelectedLogoColor(prevColor => {
-                    const currentColorIndex = logoColors.indexOf(prevColor)
-                    const nextColorIndex = (currentColorIndex + 1) % logoColors.length  // Use modulo to cycle back to 0
-                    const nextColor = logoColors[nextColorIndex]
-                    return nextColor
-                })
+                setColorIndex(prevIndex => (prevIndex + 1) % customColors.length)  // Use modulo to cycle back to 0
             }, 7000)
             return () => clearInterval(interval)
         }
-    }, [currentPage, logoColors])
+    }, [theme])
+    
+    useEffect(() => {
+        // Update selectedCustomColor when colorIndex changes
+        if (customColors && customColors.length > 1) {
+            setSelectedCustomColor(customColors[colorIndex])
+        }
+    }, [colorIndex])
 
-    const navItems = [ ...pages.filter(page => page.menu === true) ]
-    const theme = currentPage?.theme
 
     return (
 
-        <header className="px-16 h-[120px] flex flex-col items-center absolute top-0 left-0 w-full z-50  ">
+        <header className="px-16 pt-[60px] pb-5 flex flex-col items-center absolute top-0 left-0 w-full z-50  ">
             <div className="flex justify-between items-center max-w-screen-3xl w-full h-full">
                 <div className="site-logo flex items-center flex-shrink-0 mr-auto">
-                    <Link href="/" className="flex items-center w-52 h-12 -ml-3 mt-2">
-                        <LogoSvg cssClass={`${selectedLogoColor}`}/>
+                    <Link href="/" className="flex items-center w-52 h-10 -ml-3">
+                        <LogoSvg customColor={selectedCustomColor} themeColor={themeColor}/>
                     </Link>
                 </div>
-                <MainNav navItems={navItems} theme={theme} path={pathname} />
+                <MainNav navItems={navItems} theme={theme} themeColor={themeColor} customColor={selectedCustomColor} path={pathname} />
             </div>
         </header>
     )

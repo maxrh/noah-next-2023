@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function About() {
  
     return (
-        <div className="prose lg:prose-lg">
+        <div className="prose-invert prose lg:prose-lg prose-headings:font-bold prose-p:font-light prose-figure:mt-12 max-w-none">
             <h1 id="section0">This is the about page</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet risus feugiat in ante metus dictum at tempor.</p>
             <figure>

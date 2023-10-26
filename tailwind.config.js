@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: ["class"],
+    darkMode: 'class',
     content: ['./src/**/*.{js,jsx}'],
     theme: {
         container: {
@@ -75,6 +75,10 @@ module.exports = {
             transitionDuration: {
                 '2000': '2000ms',
                 '4000': '4000ms',
+            },
+            spacing: {
+                'sidebar': '280px',
+                'content': '1024px',
             },
         },
     },
