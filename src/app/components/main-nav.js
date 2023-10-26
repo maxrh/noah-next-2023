@@ -5,43 +5,59 @@ import Link from "next/link"
 
 export default function MainNav({ theme, themeColor, customColor, path, navItems }) {
 
+    const navItemsVariants = {
+        hidden: { opacity: 0, y: -20 },
+        visible: { opacity: 1, y: 0 },
+        transition: {
+            type: "tween",
+            delay: 0.5,
+            staggerChildren: 0.1,
+            duration: .25,
+        }
+    }
 
     return (
         <nav className="main-nav flex items-center">
-            <div className={`flex items-stretch h-10`}>
+            <motion.div className={`flex items-stretch h-10`}>
                 {navItems.map((item, index) => (
                     <Link 
                         key={index}
                         href={item.href}
                         className={`flex items-stretch`}
                     >
-                    <motion.span 
-                        className={`group relative ml-1 pb-2 pt-1.5 px-4 uppercase text-sm font-semibold tracking-wide `}
-                        style={{  }}
-                        initial={{ opacity: 0, y: -20, color: customColor ? customColor : themeColor }}
-                        animate={{ opacity: 1, y: 0, color: customColor ? customColor : themeColor }}
-                        
-                        transition={{ 
-                            type: "tween", 
-                            delay: .5 + 0.1 * index, 
-                            duration: .25,
-                        }}
-                    >
-                        <div 
-                            className="h-1 w-1 rounded-full absolute mx-auto left-0 right-0 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-                            style={{ backgroundColor: customColor ? customColor : themeColor }}
-                        ></div>
-                        <span className="relative z-10">{item.label}</span>
-                    </motion.span>
+                        <motion.span 
+                            className={`group relative ml-1 pb-2 pt-1.5 px-4 uppercase text-sm font-semibold tracking-wide `}
+                            initial={{ opacity: 0, y: -20, color: customColor || themeColor }}
+                            animate={{ opacity: 1, y: 0, color: customColor || themeColor }}
+                            
+                            transition={{ 
+                                type: "tween", 
+                                delay: .5 + 0.1 * index, 
+                                duration: .25,
+                            }}
+                        >
+                            <div 
+                                className="h-1 w-1 rounded-full absolute mx-auto left-0 right-0 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+                                style={{ backgroundColor: customColor || themeColor }}
+                            ></div>
+                            <span className="relative z-10">{item.label}</span>
+                        </motion.span>
                     </Link>
                 ))}
-                <button
+                <motion.button
                     className={`group relative ml-1 flex items-center justify-center w-10 h-full`}
-                    style={{ color: customColor ? customColor : themeColor }}
+                    initial={{ opacity: 0, y: -20, color: customColor || themeColor }}
+                    animate={{ opacity: 1, y: 0, color: customColor || themeColor }}
+                    
+                    transition={{ 
+                        type: "tween", 
+                        delay: 1, 
+                        duration: .25,
+                    }}
                 >
                     <i className="symbol z-10 pb-1" >search</i>
-                </button>
-            </div>
+                </motion.button>
+            </motion.div>
 
 
 

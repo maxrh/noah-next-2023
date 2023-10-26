@@ -49,12 +49,10 @@ export default function SiteHeader() {
         },
     ]
 
-
     const currentPage = pages.find(page => page.href === pathname)
-    const customColors = currentPage.customColors ? currentPage.customColors : null
-    const [selectedCustomColor, setSelectedCustomColor] = useState(customColors ? customColors[0] : null)
-
-    const [colorIndex, setColorIndex] = useState(0);  // State to keep track of the current color index
+    const customColors = currentPage?.customColors || []
+    const [selectedCustomColor, setSelectedCustomColor] = useState(null)
+    const [colorIndex, setColorIndex] = useState(0)  // State to keep track of the current color index
 
     const theme = currentPage?.theme
     const themeColor = theme === 'dark' ? '#e5e7eb' : '#111827'
@@ -62,25 +60,24 @@ export default function SiteHeader() {
     const navItems = [ ...pages.filter(page => page.menu === true) ]
 
     useEffect(() => {
-        // Initialize selectedCustomColor when the page changes
-        setColorIndex(0);  // Reset color index
-        setSelectedCustomColor(customColors ? customColors[0] : themeColor)
-    
-        // Set up color cycling if there are multiple custom colors
-        if (customColors && customColors.length > 1) {
+        setColorIndex(0)
+        
+        if (customColors && customColors.length > 0) {
             const interval = setInterval(() => {
                 setColorIndex(prevIndex => (prevIndex + 1) % customColors.length)  // Use modulo to cycle back to 0
             }, 7000)
             return () => clearInterval(interval)
         }
-    }, [theme])
+    }, [theme, pathname])
     
     useEffect(() => {
-        // Update selectedCustomColor when colorIndex changes
-        if (customColors && customColors.length > 1) {
+        if (customColors && customColors.length > 0) {
             setSelectedCustomColor(customColors[colorIndex])
+        } else {
+            setSelectedCustomColor(themeColor)
         }
-    }, [colorIndex])
+
+    }, [colorIndex, customColors, themeColor])
 
 
     return (
