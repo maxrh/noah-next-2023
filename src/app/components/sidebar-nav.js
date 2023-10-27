@@ -2,23 +2,30 @@
 
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
-
+import { motion, useInView } from "framer-motion"
 
 // Separate Item component to handle recursion
 function NavItem({ item, pathname, level }) {
     return (
-        <li>
+        <li className="my-px">
 
-            <Link 
-                href={item.path} 
-                className={`relative flex justify-between items-center py-1.5 transition-all text-sm hover:opacity-80 ${pathname === item.path ? "font-medium" : ""}`}
-            >
-                {item.title}
-                <i className={`absolute right-0 symbol ${pathname === item.path ? "opacity-100" : "opacity-0"}`}>chevron_right</i>
-            </Link>
+                <Link 
+                    href={item.path} 
+                    className={`relative font-normal flex items-center py-1.5 transition-all text-lg ${pathname === item.path ? "" : ""}`}
+                >
+                    <span className=" shrink-0 ">{item.title}</span>
+                    {/* <i className={`absolute right-0 symbol ${pathname === item.path ? "opacity-100" : "opacity-0"}`}>chevron_right</i> */}
+                    {pathname === item.path && (
+                        <div className="ml-6 w-full border-r-4 border-emerald-300 flex items-center">
+                            <span className={` border-b h-[5px] border-dashed border-slate-500 w-full mb-1`} />
+                            <i class="symbol -ml-3">arrow_right</i>
+                        </div>
+                    )}
+                </Link>
+
 
             {item.children && (
-                <ul className={`${level > 0 ? 'ml-3' : ''}`}>
+                <ul className={`${level > 0 ? '' : ''}`}>
                     {item.children.map((child, index) => (
                         <NavItem key={index} item={child} pathname={pathname} level={level + 1} />
                     ))}
@@ -86,12 +93,19 @@ export default function SidebarNav() {
     ]
 
     return (
-        <div className="sticky top-0 py-16 w-full">
+        <motion.div 
+            className="sticky top-0 w-full py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            
+        >
+            {/* <span className='block h-4 w-full striped-bg mb-8'></span> */}
+
             <ul className="flex flex-col">
                 {navItems.map((item, index) => (
                     <NavItem key={index} item={item} pathname={pathname} level={0}/>
                 ))}
             </ul>
-        </div>
+        </motion.div>
     )
 }

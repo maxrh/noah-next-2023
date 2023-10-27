@@ -1,9 +1,12 @@
 import Link from "next/link"
+import BlockTitle from "./ui/block-title"
 
 export default function SidebarContentNav() {
         
     return (
-        <div className="sticky top-0 py-16">
+        <div className="sticky top-0 ">
+            <BlockTitle title="Indhold" />
+
             <div className="content-nav-block mb-8">
                 <ul className="flex flex-col text-sm ">
                     <li><Link href="/about#section0" className="flex py-1.5">Start</Link></li>

@@ -44,12 +44,12 @@ export default function SiteHeader() {
             label: 'Om Noah',
             href: '/about',
             theme: 'dark',
-            customColors: [ '#ef4444', '#fcd34d', '#86efac', '#67e8f9', '#d8b4fe', '#fda4af'],
+            customColors: [ '#e5e7eb', '#f0abfc', '#fbcfe8', '#67e8f9', '#0f172a', '#cffafe'],
             menu: true,
         },
     ]
     const [selectedCustomColor, setSelectedCustomColor] = useState(null)
-    const [colorIndex, setColorIndex] = useState(0)  // State to keep track of the current color index
+    const [colorIndex, setColorIndex] = useState(0) 
 
     const { customColors, theme, themeColor, navItems } = useMemo(() => {
         const currentPage = pages.find(page => page.href === pathname)
@@ -60,27 +60,21 @@ export default function SiteHeader() {
     
         return { customColors, theme, themeColor, navItems }
     }, [pages, pathname])
-
+    
     useEffect(() => {
         setColorIndex(0)
-        
-        if (customColors && customColors.length > 0) {
+        setSelectedCustomColor(customColors.length > 0 ? customColors[0] : themeColor)
+        if (customColors.length > 0) {
             const interval = setInterval(() => {
-                setColorIndex(prevIndex => (prevIndex + 1) % customColors.length)  // Use modulo to cycle back to 0
+                setColorIndex(prevIndex => (prevIndex + 1) % customColors.length)
             }, 7000)
             return () => clearInterval(interval)
         }
-    }, [theme, pathname])
+    }, [pathname, theme, themeColor])
     
     useEffect(() => {
-        if (customColors && customColors.length > 0) {
-            setSelectedCustomColor(customColors[colorIndex])
-        } else {
-            setSelectedCustomColor(themeColor)
-        }
-
-    }, [colorIndex, customColors, themeColor])
-
+        if (customColors.length > 0) { setSelectedCustomColor(customColors[colorIndex]) }
+    }, [colorIndex, customColors])
 
     return (
 
@@ -94,5 +88,6 @@ export default function SiteHeader() {
                 <MainNav navItems={navItems} theme={theme} themeColor={themeColor} customColor={selectedCustomColor} path={pathname} />
             </div>
         </header>
+
     )
 }
