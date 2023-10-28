@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
+import { ThemeContext } from "../context/themeContext"
+import { useContext } from 'react'
 
-// Separate Item component to handle recursion
-function NavItem({ item, pathname, level }) {
+function NavItem({ item, pathname, level, primaryColor, menuColor }) {
     return (
         <li className="my-px">
 
@@ -14,11 +15,10 @@ function NavItem({ item, pathname, level }) {
                     className={`relative font-normal flex items-center py-1.5 transition-all text-lg ${pathname === item.path ? "" : ""}`}
                 >
                     <span className=" shrink-0 ">{item.title}</span>
-                    {/* <i className={`absolute right-0 symbol ${pathname === item.path ? "opacity-100" : "opacity-0"}`}>chevron_right</i> */}
                     {pathname === item.path && (
-                        <div className="ml-6 w-full border-r-4 border-emerald-300 flex items-center">
+                        <div className="ml-6 w-full border-r-4 border-primary flex items-center" style={{ borderColor: primaryColor }}>
                             <span className={` border-b h-[5px] border-dashed border-slate-500 w-full mb-1`} />
-                            <i class="symbol -ml-3">arrow_right</i>
+                            <i className="symbol -ml-3">arrow_right</i>
                         </div>
                     )}
                 </Link>
@@ -27,7 +27,7 @@ function NavItem({ item, pathname, level }) {
             {item.children && (
                 <ul className={`${level > 0 ? '' : ''}`}>
                     {item.children.map((child, index) => (
-                        <NavItem key={index} item={child} pathname={pathname} level={level + 1} />
+                        <NavItem key={index} item={child} pathname={pathname} level={level + 1} primaryColor={primaryColor} menuColor={menuColor} />
                     ))}
                 </ul>
             )}
@@ -38,7 +38,12 @@ function NavItem({ item, pathname, level }) {
 
 export default function SidebarNav() {
     const pathname = usePathname()
+    const { currentColors } = useContext(ThemeContext)
 
+    const menuColor = currentColors?.menu || 'var(--foreground-hex)'
+    const primaryColor = currentColors?.primary || 'var(--primary-hex)'
+
+    
     const navItems = [
         {
             title: 'Om Noah',
@@ -103,7 +108,7 @@ export default function SidebarNav() {
 
             <ul className="flex flex-col">
                 {navItems.map((item, index) => (
-                    <NavItem key={index} item={item} pathname={pathname} level={0}/>
+                    <NavItem key={index} item={item} pathname={pathname} level={0} primaryColor={primaryColor} menuColor={menuColor}/>
                 ))}
             </ul>
         </motion.div>

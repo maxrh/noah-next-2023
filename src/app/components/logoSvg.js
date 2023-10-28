@@ -1,7 +1,14 @@
+"use client"
+
 import { motion } from "framer-motion"
+import { ThemeContext } from "../context/themeContext"
+import { useContext } from 'react'
 
-export default function LogoSvg({ customColor, themeColor }) {
-
+export default function LogoSvg() {
+    
+    const { currentColors } = useContext(ThemeContext)
+    const menuColor = currentColors?.menu === 'primary' ? 'var(--primary-hex)' : currentColors?.menu  || 'var(--foreground-hex)'
+    
     return (
 
         <motion.svg 
@@ -15,12 +22,12 @@ export default function LogoSvg({ customColor, themeColor }) {
             initial={{ 
                 opacity: 0,
                 y: -10,
-                fill: customColor ? customColor : themeColor,
+                fill: menuColor,
             }}
             animate={{ 
                 opacity: 1,
                 y: 0,
-                fill: customColor ? customColor : themeColor,
+                fill: menuColor,
             }}
             transition={{ 
                 type: "spring",

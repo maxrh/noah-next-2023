@@ -1,15 +1,27 @@
 "use client"
 
-import { motion, stagger } from "framer-motion"
+import { motion } from "framer-motion"
+import { ThemeContext } from "../context/themeContext"
+import { useContext } from 'react'
 import Link from "next/link"
+import useSWR from 'swr'
 
-export default function MainNav({ theme, themeColor, customColor, path, navItems }) {
+export default function MainNav() {
+    const { currentColors } = useContext(ThemeContext)
+
+    const fetcher = url => fetch(url).then(r => r.json())
+    const { data, error } = useSWR("http://localhost:3000/api/pages", fetcher)
+    if (error) { throw new Error('Failed to fetch data') }
+
+    const menuColor = currentColors?.menu === 'primary' ? 'var(--primary-hex)' : currentColors?.menu  || 'var(--foreground-hex)'
+    const navItems = data?.filter(page => page.menu === true)
 
     const containerVariant = {
+        hidden: {},
         show: { 
             transition: {
                 staggerChildren: 0.1,
-                delayChildren: 0.25
+                delayChildren: 0.5
             }
         }
     }
@@ -34,41 +46,45 @@ export default function MainNav({ theme, themeColor, customColor, path, navItems
 
     return (
         <nav className="main-nav flex items-center">
-            <motion.div 
-                className={`flex items-stretch h-10`}
-                variants={containerVariant}
-                initial="hidden"
-                animate="show"
-            >
-                {navItems.map((item, index) => (
-                    <motion.div 
-                        key={index} 
+            { navItems && 
+                
+                <motion.div 
+                    className={`flex items-stretch h-10`}
+                    variants={containerVariant}
+                    initial="hidden"
+                    animate="show"
+                >
+                    {navItems?.map((item, index) => (
+                        <motion.div 
+                            key={index} 
+                            variants={itemVariant}
+                            animate={{ 
+                                color: menuColor,
+                                transition: { ...transitionConfig, delay: .25 + index * .1 }
+                            }}
+                        
+                        >
+                            <Link href={item.href} className={`group relative flex items-stretch ml-1 pb-2 pt-1.5 px-4 uppercase font-semibold tracking-wide`}>
+                                <div className="h-1 w-1 rounded-full absolute mx-auto left-0 right-0 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+                                    style={{ backgroundColor: menuColor }}
+                                ></div>
+                                <span className="relative z-10">{item.label}</span>
+                            </Link>
+                        </motion.div>
+                    ))}
+                    <motion.button
+                        className={`group relative ml-1 flex items-center justify-center w-10 h-full`}
                         variants={itemVariant}
                         animate={{ 
-                            color: customColor || themeColor,
-                            transition: { ...transitionConfig, delay: .25 + index * .1 }
+                            color: menuColor, 
+                            transition: { ...transitionConfig, delay: .25 + navItems.length * .1 }
                         }}
-                      
                     >
-                        <Link href={item.href} className={`group relative flex items-stretch ml-1 pb-2 pt-1.5 px-4 uppercase font-semibold tracking-wide`}>
-                            <div className="h-1 w-1 rounded-full absolute mx-auto left-0 right-0 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-                                style={{ backgroundColor: customColor || themeColor }}
-                            ></div>
-                            <span className="relative z-10">{item.label}</span>
-                        </Link>
-                    </motion.div>
-                ))}
-                <motion.button
-                    className={`group relative ml-1 flex items-center justify-center w-10 h-full`}
-                    variants={itemVariant}
-                    animate={{ 
-                        color: customColor || themeColor, 
-                        transition: { ...transitionConfig, delay: .25 + navItems.length * .1 }
-                    }}
-                >
-                    <i className="symbol z-10 pb-1" >search</i>
-                </motion.button>
-            </motion.div>
+                        <i className="symbol z-10 pb-1" >search</i>
+                    </motion.button>
+                </motion.div>
+            
+            }
 
             <form className="search hidden items-center">
                 <input type="text" placeholder="" className="search-input w-48 h-8  px-3 py-1.5"/>
