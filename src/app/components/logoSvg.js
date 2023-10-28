@@ -7,7 +7,7 @@ import { useContext } from 'react'
 export default function LogoSvg() {
     
     const { currentColors } = useContext(ThemeContext)
-    const menuColor = currentColors?.menu === 'primary' ? 'var(--primary-hex)' : currentColors?.menu  || 'var(--foreground-hex)'
+    const menuColor = currentColors?.menu  || 'var(--foreground-hex)'
     
     return (
 

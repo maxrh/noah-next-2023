@@ -38,9 +38,9 @@ export default function AboutLayout({ children }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: .5 }}
                     >
-                        <Image className="mask-image object-cover object-center w-full h-full" width={1800} height={1350} src={`/images/${currentPageData.image}`} alt="Placeholder" priority />
+                        <Image className="mask-image object-cover object-center w-full h-full" width={1800} height={1000} src={`/images/${currentPageData.image}`} alt="Placeholder" priority />
                     </motion.div> 
                 }
             </AnimatePresence>
@@ -51,7 +51,7 @@ export default function AboutLayout({ children }) {
                         <div className={`navigation relative hidden md:flex flex-col items-center h-full border-r border-slate-950/50 w-[var(--sidebar-width)]`}>
                             <SidebarNav />
                         </div>
-                        <div className="min-h-screen pb-16 w-full">
+                        <div className="min-h-screen py-14 w-full">
 
                             {children}
                         </div>

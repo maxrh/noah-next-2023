@@ -8,13 +8,14 @@ import useSWR from 'swr'
 
 export default function MainNav() {
     const { currentColors } = useContext(ThemeContext)
+    const menuColor = currentColors?.menu  || 'var(--foreground-hex)'
 
     const fetcher = url => fetch(url).then(r => r.json())
     const { data, error } = useSWR("http://localhost:3000/api/pages", fetcher)
-    if (error) { throw new Error('Failed to fetch data') }
 
-    const menuColor = currentColors?.menu === 'primary' ? 'var(--primary-hex)' : currentColors?.menu  || 'var(--foreground-hex)'
     const navItems = data?.filter(page => page.menu === true)
+
+    if (error) { throw new Error('Failed to fetch data') }
 
     const containerVariant = {
         hidden: {},
