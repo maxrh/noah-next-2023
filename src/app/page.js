@@ -37,7 +37,9 @@ export default function Home() {
             ></motion.div>
 
                 <div className="flex flex-col items-center w-full">
-                    <HeroSection handleHeroColor={handleHeroColor}/>
+                    <div className='h-[calc(100vh-120px)] w-full relative py-8'>
+                        <HeroSection id={'frontpage'} handleHeroColor={handleHeroColor} />
+                    </div>
                     <span className='block h-4 w-full striped-bg-gray'></span>
 
                     {/* <PagesSection /> */}

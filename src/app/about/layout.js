@@ -3,6 +3,7 @@
 import SoMeSidebarWidget from "../components/soMe-sidebar-widget"
 import SidebarNav from "../components/sidebar-nav"
 import SidebarContentNav from "../components/sidebar-content-nav"
+import HeroSection from "../components/hero-section"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeContext } from "../context/themeContext"
 import { useContext } from 'react'
@@ -45,18 +46,12 @@ export default function AboutLayout({ children }) {
                     </motion.div> 
                 }
             </AnimatePresence>
-            <div className="w-full h-[calc(60vh-120px)] px-16 relative z-10">
-            { !isLoading && currentPageData?.lead && 
-                <div className=" max-w-screen-3xl mx-auto h-full">
-                    <div className="flex flex-col items-start justify-center h-full">
-                        <span className="text-6xl font-bold  max-w-[21ch]">{currentPageData.lead}</span>
-                        <span className="font-normal mt-6">Id aliquet risus feugiat in ante metus dictum at tempor.</span>
 
-                    </div>
-                    <div className="flex items-center justify-center"></div>
-                </div>
+            { !isLoading && currentPageData?.slideshow === true 
+                ? <div className=" h-[calc(60vh-120px)] w-full relative z-10 pt-8"><HeroSection id={'about'} noBottomBar/></div>
+                : <div className=" h-[calc(60vh-120px)] w-full relative z-10"></div>
             }
-            </div>
+        
             <div className="relative z-10 px-16">
                 <div className="max-w-screen-3xl mx-auto flex flex-col items-center">
                     <div className={`grid w-full md:gap-16 

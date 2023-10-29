@@ -60,6 +60,7 @@ export default function MainNav() {
                     {navItems?.map((item, index) => (
                         <motion.div 
                             key={index} 
+                            className="flex items-stretch"
                             variants={itemVariant}
                             animate={{ 
                                 color: menuColor,
@@ -67,12 +68,12 @@ export default function MainNav() {
                             }}
                         
                         >
-                            <Link href={item.href} className={`group relative flex items-stretch ml-1 pb-2 pt-1.5 px-4 text-2xl font-bold`}>
+                            <Link href={item.href} className={`group relative flex items-center ml-1 px-4 text-2xl font-bold leading-none`}>
                                 <motion.div 
                                     className={`
                                         absolute mx-auto left-0 right-0 group-hover:opacity-100 
                                         ${(item.href === pathname || pathname.startsWith(`${item.href}/`)) 
-                                            ? 'top-10 opacity-100 group-hover:top-10' 
+                                            ? 'top-9 opacity-100 group-hover:top-9' 
                                             : '-top-10 opacity-0 group-hover:-top-5'} 
                                         transition-all duration-200 ease-in-out flex justify-center
                                     `}

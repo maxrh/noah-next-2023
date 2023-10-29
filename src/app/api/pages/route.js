@@ -75,6 +75,7 @@ export async function GET(request) {
                 primary: '#6366f1', 
                 background: '', 
             },
+            slideshow: true,
             menu: true,
             childPages: [
                 {
