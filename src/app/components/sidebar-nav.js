@@ -5,14 +5,16 @@ import { usePathname } from 'next/navigation'
 import { motion } from "framer-motion"
 import { ThemeContext } from "../context/themeContext"
 import { useContext } from 'react'
+import BlockTitle from "./ui/block-title"
 
 function NavItem({ item, pathname, level, primaryColor, menuColor }) {
     return (
-        <li className="my-px">
+        <li className="">
 
                 <Link 
                     href={item.path} 
-                    className={`relative font-normal flex items-center py-1.5 transition-all text-lg ${pathname === item.path ? "" : ""}`}
+                    className={`relative flex items-center py-1.5 transition-all xl:text-lg tracking-wide  ${pathname === item.path ? "font-medium" : "font-normal"}`}
+                    style={{ color: pathname === item.path ? primaryColor : '' }}
                 >
                     <span className=" shrink-0 ">{item.title}</span>
                     {pathname === item.path && (
@@ -25,9 +27,9 @@ function NavItem({ item, pathname, level, primaryColor, menuColor }) {
 
 
             {item.children && (
-                <ul className={`${level > 0 ? '' : ''}`}>
+                <ul className={`ml-4`}>
                     {item.children.map((child, index) => (
-                        <NavItem key={index} item={child} pathname={pathname} level={level + 1} primaryColor={primaryColor} menuColor={menuColor} />
+                        <NavItem key={index} item={child} pathname={pathname} primaryColor={primaryColor} menuColor={menuColor} />
                     ))}
                 </ul>
             )}
@@ -46,65 +48,62 @@ export default function SidebarNav() {
     
     const navItems = [
         {
-            title: 'Om Noah',
-            path: '/about',
+            title: 'Vision',
+            path: '/about/vision',
+        },
+        {
+            title: 'Organisation',
+            path: '/about/organisation',
             children: [
                 {
-                    title: 'Vision',
-                    path: '/about/vision',
+                    title: 'Grupper',
+                    path: '/about/organisation/grupper',
                 },
                 {
-                    title: 'Organisation',
-                    path: '/about/organisation',
-                    children: [
-                        {
-                            title: 'Grupper',
-                            path: '/about/organisation/grupper',
-                        },
-                        {
-                            title: 'Bestyrelse',
-                            path: '/about/organisation/bestyrelse',
-                        },
-                    ]
-                },
-                {
-                    title: 'Historie',
-                    path: '/about/historie',
-                },
-                {
-                    title: 'Internationalt',
-                    path: '/about/internationalt',
-                },
-                {
-                    title: 'Årsrapporter',
-                    path: '/about/årsrapporter',
-                },
-                {
-                    title: 'Presse',
-                    path: '/about/presse',
-                    children: [
-                        {
-                            title: 'Logo & billeder',
-                            path: '/about/presse/logo-billeder',
-                        },
-                    ]
-                },
-                {
-                    title: 'Netværk',
-                    path: '/about/netværk',
+                    title: 'Bestyrelse',
+                    path: '/about/organisation/bestyrelse',
                 },
             ]
         },
+        {
+            title: 'Historie',
+            path: '/about/historie',
+        },
+        {
+            title: 'Internationalt',
+            path: '/about/internationalt',
+        },
+        {
+            title: 'Årsrapporter',
+            path: '/about/årsrapporter',
+        },
+        {
+            title: 'Presse',
+            path: '/about/presse',
+            children: [
+                {
+                    title: 'Logo & billeder',
+                    path: '/about/presse/logo-billeder',
+                },
+            ]
+        },
+        {
+            title: 'Netværk',
+            path: '/about/netværk',
+        },
     ]
+        
+    
 
     return (
         <motion.div 
-            className="sticky top-0 w-full py-16"
+            className="sticky top-0 py-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             
         >
             {/* <span className='block h-4 w-full striped-bg mb-8'></span> */}
+            <BlockTitle title={`Om Noah`}  href={'/about'} />
 
             <ul className="flex flex-col">
                 {navItems.map((item, index) => (

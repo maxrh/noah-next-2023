@@ -3,10 +3,12 @@
 import { motion } from "framer-motion"
 import { ThemeContext } from "../context/themeContext"
 import { useContext } from 'react'
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import useSWR from 'swr'
 
 export default function MainNav() {
+    const pathname = usePathname()
     const { currentColors } = useContext(ThemeContext)
     const menuColor = currentColors?.menu  || 'var(--foreground-hex)'
 
@@ -61,27 +63,46 @@ export default function MainNav() {
                             variants={itemVariant}
                             animate={{ 
                                 color: menuColor,
-                                transition: { ...transitionConfig, delay: .25 + index * .1 }
+                                transition: { ...transitionConfig }
                             }}
                         
                         >
-                            <Link href={item.href} className={`group relative flex items-stretch ml-1 pb-2 pt-1.5 px-4 uppercase font-semibold tracking-wide`}>
-                                <div className="h-1 w-1 rounded-full absolute mx-auto left-0 right-0 -top-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-                                    style={{ backgroundColor: menuColor }}
-                                ></div>
+                            <Link href={item.href} className={`group relative flex items-stretch ml-1 pb-2 pt-1.5 px-4 text-2xl font-bold`}>
+                                <motion.div 
+                                    className={`
+                                        absolute mx-auto left-0 right-0 group-hover:opacity-100 
+                                        ${(item.href === pathname || pathname.startsWith(`${item.href}/`)) 
+                                            ? 'top-10 opacity-100 group-hover:top-10' 
+                                            : '-top-10 opacity-0 group-hover:-top-5'} 
+                                        transition-all duration-200 ease-in-out flex justify-center
+                                    `}
+                                   
+                                    initial={{ y: -20 }}
+                                    animate={{ y: 0 }}
+                                   
+                                >
+                                        <i className="symbol z-10 " style={{ fontVariationSettings: `'wght' 400`, fontSize: '32px' }}>
+                                            arrow_drop_down
+                                        </i>
+                                </motion.div>
                                 <span className="relative z-10">{item.label}</span>
                             </Link>
                         </motion.div>
                     ))}
                     <motion.button
-                        className={`group relative ml-1 flex items-center justify-center w-10 h-full`}
+                        className={`group relative ml-4 flex items-center justify-center w-10 h-full`}
                         variants={itemVariant}
                         animate={{ 
                             color: menuColor, 
-                            transition: { ...transitionConfig, delay: .25 + navItems.length * .1 }
+                            transition: { ...transitionConfig }
                         }}
                     >
-                        <i className="symbol z-10 pb-1" >search</i>
+                        <i 
+                            className="symbol z-10" 
+                            style={{ fontVariationSettings: `'wght' 700`, fontSize: '28px' }}
+                        >
+                            search
+                        </i>
                     </motion.button>
                 </motion.div>
             

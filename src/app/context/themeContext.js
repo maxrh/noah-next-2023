@@ -3,6 +3,7 @@
 import { createContext, useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
+import useFlattenPages from '../hooks/useFlattenPages'
 import useSWR from 'swr'
 
 export const ThemeContext = createContext()
@@ -17,15 +18,9 @@ const ThemeContextProvider = ({ children }) => {
     const [currentColors, setCurrentColors] = useState({ menu: '', primary: '', background: '' })
 
     useEffect(() => {
-        if (data) {
-            // Flatten the data structure to include all parent and child pages in a single array
-            const allPages = data.reduce((acc, page) => {
-                acc.push(page)
-                if (page.childPages) { acc.push(...page.childPages)}
-                return acc
-            }, [])
-            
-            const currentPageData = allPages.find(page => page.href === pathname);
+        if (data) {            
+            const allPages = useFlattenPages(data)
+            const currentPageData = allPages.find(page => page.href === pathname)
 
             if (currentPageData) {
                 setCurrentColors(currentPageData.customColors)

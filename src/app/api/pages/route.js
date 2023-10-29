@@ -22,9 +22,9 @@ export async function GET(request) {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             theme: 'light',
             customColors: { 
-                menu: '#e5e7eb', 
-                primary: '#f0abfc', 
-                background: '#fbcfe8', 
+                menu: '', 
+                primary: '', 
+                background: '', 
             },
             menu: true,
         },
@@ -38,9 +38,9 @@ export async function GET(request) {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             theme: 'dark',
             customColors: { 
-                menu: '#e5e7eb', 
+                menu: '#6ee7b7', 
                 primary: '#f0abfc', 
-                background: '#fbcfe8', 
+                background: '', 
             },
             menu: true,
         },
@@ -54,9 +54,9 @@ export async function GET(request) {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             theme: 'light',
             customColors: { 
-                menu: '#e5e7eb', 
-                primary: '#f0abfc', 
-                background: '#fbcfe8', 
+                menu: '', 
+                primary: '', 
+                background: '', 
             },
             menu: true,
         },
@@ -71,8 +71,8 @@ export async function GET(request) {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             theme: 'dark',
             customColors: { 
-                menu: '', 
-                primary: '', 
+                menu: '#6366f1', 
+                primary: '#6366f1', 
                 background: '', 
             },
             menu: true,
@@ -83,11 +83,11 @@ export async function GET(request) {
                     href: '/about/vision',
                     title: 'Vision',
                     lead: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                    image: 'photo-1582699011340-21e302507754.jpg',
+                    image: 'file-20211110-15-xaoiy8.avif',
                     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     theme: 'dark',
                     customColors: { 
-                        menu: '#fb7185', 
+                        menu: '', 
                         primary: '', 
                         background: '', 
                     },
@@ -108,9 +108,60 @@ export async function GET(request) {
                         background: '#1e1b4b', 
                     },
                     menu: false,
+                    childPages: [
+                        {
+                            id: '5.2.1',
+                            label: 'Grupper',
+                            href: '/about/organisation/grupper',
+                            title: 'Grupper',
+                            lead: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                            image: 'No-TTIP-GREEN_1.jpg',
+                            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            theme: 'dark',
+                            customColors: { 
+                                menu: '#99f6e4', 
+                                primary: '#99f6e4', 
+                                background: '', 
+                            },
+                            menu: false,
+                        },
+                        {
+                            id: '5.2.2',
+                            label: 'Bestyrelse',
+                            href: '/about/organisation/bestyrelse',
+                            title: 'Bestyrelse',
+                            lead: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                            image: 'Frame-2008.jpg',
+                            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            theme: 'light',
+                            customColors: { 
+                                menu: '', 
+                                primary: '', 
+                                background: '', 
+                            },
+                            menu: false,
+                        },
+                    ]
+                },
+                {
+                    id: '5.3',
+                    label: 'Historie',
+                    href: '/about/historie',
+                    title: 'Dette er vores historie',
+                    lead: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    image: 'photo-1582699011340-21e302507754.jpg',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+                    theme: 'dark',
+                    customColors: { 
+                        menu: '', 
+                        primary: '', 
+                        background: '', 
+                    },
+                    menu: false,
                 },
             ]
         },  
+        
     ]
 
     const jsonData = JSON.stringify(pages);
