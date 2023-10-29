@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ThemeContext } from "../context/themeContext"
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import useSWR from 'swr'
@@ -10,7 +10,6 @@ import useSWR from 'swr'
 export default function MainNav() {
     const pathname = usePathname()
     const { currentColors } = useContext(ThemeContext)
-    const menuColor = currentColors?.menu  || 'var(--foreground-hex)'
 
     const fetcher = url => fetch(url).then(r => r.json())
     const { data, error } = useSWR("http://localhost:3000/api/pages", fetcher)
@@ -63,7 +62,7 @@ export default function MainNav() {
                             className="flex items-stretch"
                             variants={itemVariant}
                             animate={{ 
-                                color: menuColor,
+                                color: currentColors.menu ,
                                 transition: { ...transitionConfig }
                             }}
                         
@@ -94,7 +93,7 @@ export default function MainNav() {
                         className={`group relative ml-4 flex items-center justify-center w-10 h-full`}
                         variants={itemVariant}
                         animate={{ 
-                            color: menuColor, 
+                            color: currentColors.menu , 
                             transition: { ...transitionConfig }
                         }}
                     >

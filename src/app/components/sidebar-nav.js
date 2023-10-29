@@ -13,7 +13,7 @@ function NavItem({ item, pathname, level, primaryColor, menuColor }) {
 
                 <Link 
                     href={item.path} 
-                    className={`relative flex items-center py-1.5 transition-all xl:text-lg tracking-wide  ${pathname === item.path ? "font-medium" : "font-normal"}`}
+                    className={`relative flex items-center pb-3 transition-all xl:text-lg leading-none tracking-wide  ${pathname === item.path ? "font-medium" : "font-normal"}`}
                     style={{ color: pathname === item.path ? primaryColor : '' }}
                 >
                     <span className=" shrink-0 ">{item.title}</span>

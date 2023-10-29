@@ -12,15 +12,21 @@ const ThemeContextProvider = ({ children }) => {
     const { theme, setTheme } = useTheme()
 
     const fetcher = url => fetch(url).then(r => r.json())
-    const { data, error } = useSWR("http://localhost:3000/api/pages", fetcher)
+    const { data, error, isLoading } = useSWR("http://localhost:3000/api/pages", fetcher)
 
-    const [currentColors, setCurrentColors] = useState({ menu: '', primary: '', background: '' })
-    
-    
+    const themeMenuColor = !isLoading && theme === 'dark' ? '#f3f4f6' : '#111827'
+    const themePrimaryColor = !isLoading && theme === 'dark' ? '#6ee7b7' : '#6ee7b7'
+    const themeBackgroundColor = !isLoading && theme === 'dark' ? '#111827' : '#f3f4f6'
+
+    const [currentColors, setCurrentColors] = useState({ 
+        menu: themeMenuColor, 
+        primary: themePrimaryColor, 
+        background: themeBackgroundColor
+    })
+
 
     useEffect(() => {
         if (data) {     
-            
             function flattenPages(pages) {
                 return pages.reduce((acc, page) => {
                     acc.push(page);
@@ -33,8 +39,13 @@ const ThemeContextProvider = ({ children }) => {
             const currentPageData = allPages.find(page => page.href === pathname)
 
             if (currentPageData) {
-                setCurrentColors(currentPageData.customColors)
                 setTheme(currentPageData.theme)
+                setCurrentColors({
+                    menu: currentPageData.customColors.menu || themeMenuColor,
+                    primary: currentPageData.customColors.primary || themePrimaryColor,
+                    background: currentPageData.customColors.background || themeBackgroundColor,
+                })
+
             }
         }
     }, [data, pathname, theme, setTheme])

@@ -8,7 +8,8 @@ export function ThemeProviders({ children }) {
             themes={['light', 'dark']} 
             attribute="class"
             defaultTheme="dark"
-            
+      
+
         >
             {children}
         </ThemeProvider>

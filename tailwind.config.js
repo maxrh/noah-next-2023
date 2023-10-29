@@ -24,12 +24,12 @@ module.exports = {
                 ring: "hsl(var(--ring))",
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
-                backgroundHex: "hsl(var(--background-hex))",
-                foregroundHex: "hsl(var(--foreground-hex))",
+                backgroundHex: "var(--background-hex)",
+                foregroundHex: "var(--foreground-hex)",
                 primary: {
                     DEFAULT: "hsl(var(--primary))",
                     foreground: "hsl(var(--primary-foreground))",
-                    hex: "hsl(var(--primary-hex))",
+                    hex: "var(--primary-hex)",
                 },
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",

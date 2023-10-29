@@ -7,7 +7,7 @@ export default function BlockTitle({ title, subtitle, href, style, id }) {
 
     const primaryColor = currentColors?.primary || 'var(--primary-hex)'
     const backgroundColor = currentColors?.background || 'var(--background-hex)'
-    console.log(href)
+
     return (
         style === 'outline' ? (
             <Link href="/" className="inline-flex items-center relative mb-8">

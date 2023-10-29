@@ -16,10 +16,10 @@ export default function SidebarContentNav() {
                 <BlockTitle title={`Indhold`}  subtitle={pathname} />
 
                 <ul className="flex flex-col pl-8">
-                    <li><Link href="/about#section0" className="flex py-1.5">Start</Link></li>
-                    <li><Link href="/about#section1" className="flex py-1.5">Section 1</Link></li>
-                    <li><Link href="/about#section2" className="flex py-1.5">Section 2</Link></li>
-                    <li><Link href="/about#section3" className="flex py-1.5">Section 3</Link></li>
+                    <li><Link href="/about#section0" className="flex pb-3">Start</Link></li>
+                    <li><Link href="/about#section1" className="flex pb-3">Section 1</Link></li>
+                    <li><Link href="/about#section2" className="flex pb-3">Section 2</Link></li>
+                    <li><Link href="/about#section3" className="flex pb-3">Section 3</Link></li>
                 </ul>
             </div>
 

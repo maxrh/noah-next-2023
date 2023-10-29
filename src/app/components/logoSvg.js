@@ -5,12 +5,9 @@ import { ThemeContext } from "../context/themeContext"
 import { useContext } from 'react'
 
 export default function LogoSvg() {
-    
     const { currentColors } = useContext(ThemeContext)
-    const menuColor = currentColors?.menu  || 'var(--foreground-hex)'
     
     return (
-
         <motion.svg 
             version="1.1" 
             id="Layer_1" 
@@ -22,12 +19,12 @@ export default function LogoSvg() {
             initial={{ 
                 opacity: 0,
                 y: -10,
-                fill: menuColor,
+                fill: currentColors.menu,
             }}
             animate={{ 
                 opacity: 1,
                 y: 0,
-                fill: menuColor,
+                fill: currentColors.menu,
             }}
             transition={{ 
                 type: "tween", 
