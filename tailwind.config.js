@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: ["class"],
+    darkMode: 'class',
     content: ['./src/**/*.{js,jsx}'],
     theme: {
         container: {
@@ -24,9 +24,12 @@ module.exports = {
                 ring: "hsl(var(--ring))",
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
+                backgroundHex: "var(--background-hex)",
+                foregroundHex: "var(--foreground-hex)",
                 primary: {
                     DEFAULT: "hsl(var(--primary))",
                     foreground: "hsl(var(--primary-foreground))",
+                    hex: "var(--primary-hex)",
                 },
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",
@@ -75,6 +78,10 @@ module.exports = {
             transitionDuration: {
                 '2000': '2000ms',
                 '4000': '4000ms',
+            },
+            spacing: {
+                'sidebar': '280px',
+                'content': '1024px',
             },
         },
     },

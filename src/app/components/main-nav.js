@@ -1,26 +1,112 @@
 "use client"
 
+import { motion } from "framer-motion"
+import { ThemeContext } from "../context/themeContext"
+import { useContext, useMemo } from 'react'
+import { usePathname } from "next/navigation"
 import Link from "next/link"
+import useSWR from 'swr'
 
-export default function MainNav({ theme, path, navItems }) {
+export default function MainNav() {
+    const pathname = usePathname()
+    const { currentColors } = useContext(ThemeContext)
 
+    const fetcher = url => fetch(url).then(r => r.json())
+    const { data, error } = useSWR("http://localhost:3000/api/pages", fetcher)
+
+    const navItems = data?.filter(page => page.menu === true)
+
+    if (error) { throw new Error('Failed to fetch data') }
+
+    const containerVariant = {
+        hidden: {},
+        show: { 
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.5
+            }
+        }
+    }
+
+    const transitionConfig = {
+        type: "tween", 
+        ease: "easeInOut",
+        duration: .15,
+    }
+
+    const itemVariant = {
+        hidden: { 
+            opacity: 0, 
+            y: -10,
+        },
+        show: { 
+            opacity: 1, 
+            y: 0,
+            transition: { ...transitionConfig  }
+        }                      
+    }
 
     return (
         <nav className="main-nav flex items-center">
-            <div className={`flex items-stretch font-semibold text-sm tracking-wide uppercase text-foreground h-10`}>
-                {navItems.map((item, index) => (
-                    <Link key={index} href={item.href} className={`group relative ml-1 pb-2 pt-1.5 px-4 ${path === item.href ? 'bg-emerald-300' : 'bg-background'}`}>
-                        <span className="relative z-10">{item.label}</span>
-                        <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
-                    </Link>
-                ))}
-                <Link href="/about" className="group relative ml-1 flex items-center justify-center w-10 h-full bg-background">
-                    <i className="symbol z-10 pb-1">search</i>
-                    <div className="w-full h-0 group-hover:h-10 transition-all duration-300 ease-in-out absolute bottom-0 left-0 bg-emerald-300"></div>
-                </Link >
-            </div>
-
-
+            { navItems && 
+                
+                <motion.div 
+                    className={`flex items-stretch h-10`}
+                    variants={containerVariant}
+                    initial="hidden"
+                    animate="show"
+                >
+                    {navItems?.map((item, index) => (
+                        <motion.div 
+                            key={index} 
+                            className="flex items-stretch"
+                            variants={itemVariant}
+                            animate={{ 
+                                color: currentColors.menu ,
+                                transition: { ...transitionConfig }
+                            }}
+                        
+                        >
+                            <Link href={item.href} className={`group relative flex items-center ml-1 px-4 text-2xl font-bold leading-none`}>
+                                <motion.div 
+                                    className={`
+                                        absolute mx-auto left-0 right-0 group-hover:opacity-100 
+                                        ${(item.href === pathname || pathname.startsWith(`${item.href}/`)) 
+                                            ? 'top-9 opacity-100 group-hover:top-9' 
+                                            : '-top-10 opacity-0 group-hover:-top-5'} 
+                                        transition-all duration-200 ease-in-out flex justify-center
+                                    `}
+                                   
+                                    initial={{ y: -20 }}
+                                    animate={{ y: 0 }}
+                                   
+                                >
+                                        <i className="symbol z-10 " style={{ fontVariationSettings: `'wght' 400`, fontSize: '32px' }}>
+                                            arrow_drop_down
+                                        </i>
+                                </motion.div>
+                                <span className="relative z-10">{item.label}</span>
+                            </Link>
+                        </motion.div>
+                    ))}
+                    <motion.button
+                        className={`group relative ml-4 flex items-center justify-center w-10 h-full`}
+                        variants={itemVariant}
+                        animate={{ 
+                            color: currentColors.menu , 
+                            transition: { ...transitionConfig }
+                        }}
+                    >
+                        <i 
+                            className="symbol z-10" 
+                            style={{ fontVariationSettings: `'wght' 700`, fontSize: '28px' }}
+                        >
+                            search
+                        </i>
+                    </motion.button>
+                </motion.div>
+            
+            }
 
             <form className="search hidden items-center">
                 <input type="text" placeholder="" className="search-input w-48 h-8  px-3 py-1.5"/>

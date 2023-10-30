@@ -2,25 +2,34 @@
 
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
+import { motion } from "framer-motion"
+import { ThemeContext } from "../context/themeContext"
+import { useContext } from 'react'
+import BlockTitle from "./ui/block-title"
 
-
-// Separate Item component to handle recursion
-function NavItem({ item, pathname, level }) {
+function NavItem({ item, pathname, level, primaryColor, menuColor }) {
     return (
-        <li>
+        <li className="">
 
-            <Link 
-                href={item.path} 
-                className={`relative flex justify-between items-center py-1.5 transition-all text-sm text-gray-800 hover:text-gray-950 ${pathname === item.path ? "font-medium text-gray-950" : ""}`}
-            >
-                {item.title}
-                <i className={`absolute right-0 symbol ${pathname === item.path ? "opacity-100" : "opacity-0"}`}>chevron_right</i>
-            </Link>
+                <Link 
+                    href={item.path} 
+                    className={`relative flex items-center pb-3 transition-all xl:text-lg leading-none tracking-wide  ${pathname === item.path ? "font-medium" : "font-normal"}`}
+                    style={{ color: pathname === item.path ? primaryColor : '' }}
+                >
+                    <span className=" shrink-0 ">{item.title}</span>
+                    {pathname === item.path && (
+                        <div className="ml-6 w-full border-r-4 border-primary flex items-center" style={{ borderColor: primaryColor }}>
+                            <span className={` border-b h-[5px] border-dashed border-slate-500 w-full mb-1`} />
+                            <i className="symbol -ml-3">arrow_right</i>
+                        </div>
+                    )}
+                </Link>
+
 
             {item.children && (
-                <ul className={`${level > 0 ? 'ml-3' : ''}`}>
+                <ul className={`ml-4`}>
                     {item.children.map((child, index) => (
-                        <NavItem key={index} item={child} pathname={pathname} level={level + 1} />
+                        <NavItem key={index} item={child} pathname={pathname} primaryColor={primaryColor} menuColor={menuColor} />
                     ))}
                 </ul>
             )}
@@ -31,67 +40,76 @@ function NavItem({ item, pathname, level }) {
 
 export default function SidebarNav() {
     const pathname = usePathname()
+    const { currentColors } = useContext(ThemeContext)
 
+    const menuColor = currentColors?.menu || 'var(--foreground-hex)'
+    const primaryColor = currentColors?.primary || 'var(--primary-hex)'
+
+    
     const navItems = [
         {
-            title: 'Om Noah',
-            path: '/about',
+            title: 'Vision',
+            path: '/about/vision',
+        },
+        {
+            title: 'Organisation',
+            path: '/about/organisation',
             children: [
                 {
-                    title: 'Vision',
-                    path: '/about/vision',
+                    title: 'Grupper',
+                    path: '/about/organisation/grupper',
                 },
                 {
-                    title: 'Organisation',
-                    path: '/about/organisation',
-                    children: [
-                        {
-                            title: 'Grupper',
-                            path: '/about/organisation/grupper',
-                        },
-                        {
-                            title: 'Bestyrelse',
-                            path: '/about/organisation/bestyrelse',
-                        },
-                    ]
-                },
-                {
-                    title: 'Historie',
-                    path: '/about/historie',
-                },
-                {
-                    title: 'Internationalt',
-                    path: '/about/internationalt',
-                },
-                {
-                    title: 'Årsrapporter',
-                    path: '/about/årsrapporter',
-                },
-                {
-                    title: 'Presse',
-                    path: '/about/presse',
-                    children: [
-                        {
-                            title: 'Logo & billeder',
-                            path: '/about/presse/logo-billeder',
-                        },
-                    ]
-                },
-                {
-                    title: 'Netværk',
-                    path: '/about/netværk',
+                    title: 'Bestyrelse',
+                    path: '/about/organisation/bestyrelse',
                 },
             ]
         },
+        {
+            title: 'Historie',
+            path: '/about/historie',
+        },
+        {
+            title: 'Internationalt',
+            path: '/about/internationalt',
+        },
+        {
+            title: 'Årsrapporter',
+            path: '/about/årsrapporter',
+        },
+        {
+            title: 'Presse',
+            path: '/about/presse',
+            children: [
+                {
+                    title: 'Logo & billeder',
+                    path: '/about/presse/logo-billeder',
+                },
+            ]
+        },
+        {
+            title: 'Netværk',
+            path: '/about/netværk',
+        },
     ]
+        
+    
 
     return (
-        <div className="sticky top-0 py-16">
-            <ul className="flex flex-col pr-12">
+        <motion.div 
+            className="sticky top-0 py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            
+        >
+            {/* <span className='block h-4 w-full striped-bg mb-8'></span> */}
+            <BlockTitle title={`Om Noah`}  href={'/about'} />
+
+            <ul className="flex flex-col">
                 {navItems.map((item, index) => (
-                    <NavItem key={index} item={item} pathname={pathname} level={0}/>
+                    <NavItem key={index} item={item} pathname={pathname} level={0} primaryColor={primaryColor} menuColor={menuColor}/>
                 ))}
             </ul>
-        </div>
+        </motion.div>
     )
 }
